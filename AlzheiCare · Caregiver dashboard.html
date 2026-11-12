@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AlzheiCare · Caregiver dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+ 
+</head>
+
+<body>
+
+  <aside>
+    <div class="logo">Alzhei<span>Care</span></div>
+    <nav>
+      <a class="nav" href="#overview">Overview</a>
+      <a class="nav" href="#routines">Routines</a>
+      <a class="nav" href="#alerts">Alerts</a>
+      <a class="nav" href="#progress">Progress</a>
+      <a class="nav" href="#safety">Safe zones</a>
+      <a class="nav" href="#patient">Patient</a>
+      <a class="nav" href="#settings">Settings</a>
+    </nav>
+    <div class="me">
+      <div class="avatar">CD</div>
+      <div>
+        <h3>Claire Dubois</h3><small>Caregiver</small>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="view" id="overview">
+      <div class="top">
+        <div><small id="today">Today</small>
+          <h1>Good morning, Claire</h1>
+          <p class="mute">Here is how Henri is doing today.</p>
+        </div>
+        <a class="btn" href="#new">+ New routine</a>
+      </div>
+
+      <div class="grid g4">
+        <div class="card stat"><small>Tasks done today</small><b>5 / 7</b><progress max="7" value="5"></progress></div>
+        <div class="card stat"><small>Active routines</small><b>6</b><span class="tag lav">2 reminders set</span></div>
+        <a class="card stat" href="#alerts"><small>Unread alerts</small><b>2</b><span class="tag rose">Needs
+            attention</span></a>
+        <a class="card stat" href="#safety"><small>Location</small><b>Home</b><span class="tag mint">Inside safe
+            zone</span></a>
+      </div>
+
+      <div class="grid g2" style="margin-top:18px">
+        <div class="card">
+          <h2>Today’s routine</h2>
+          <div class="row"><span class="time">07:30</span>
+            <div class="grow">
+              <h3>Take morning medicine</h3><small>With breakfast</small>
+            </div><span class="tag mint">Done</span>
+          </div>
+          <div class="row"><span class="time">09:00</span>
+            <div class="grow">
+              <h3>Short walk in the garden</h3><small>15 minutes</small>
+            </div><span class="tag mint">Done</span>
+          </div>
+          <div class="row"><span class="time">12:30</span>
+            <div class="grow">
+              <h3>Lunch and a glass of water</h3><small>Kitchen table</small>
+            </div><span class="tag peach">Missed</span>
+          </div>
+          <div class="row"><span class="time">15:00</span>
+            <div class="grow">
+              <h3>Call Sophie (daughter)</h3><small>Photo on the fridge</small>
+            </div><span class="tag sky">Upcoming</span>
+          </div>
+          <a class="btn soft" href="#routines" style="margin-top:14px">See all routines</a>
+        </div>
+        <div class="card">
+          <h2>Live location</h2>
+          <div class="map">
+            <div class="zone"></div>
+            <div class="pin"></div>
+          </div>
+          <p style="margin-top:12px"><small>Last position sent 2 minutes ago · accuracy 8 m</small></p>
+          <a class="btn soft" href="#safety" style="margin-top:8px">Manage safe zones</a>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <h2>Quick actions</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="#new">Create a routine</a>
+          <a class="btn soft" href="#new">Set a reminder</a>
+          <a class="btn soft" href="#progress">View progress</a>
+          <a class="btn soft" href="#patient">Pairing code</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ROUTINES ============ -->
+    <section class="view" id="routines">
+      <div class="top">
+        <div>
+          <h1>Routines</h1>
+          <p class="mute">Add, change or pause the daily routine.</p>
+        </div>
+        <a class="btn" href="#new">+ New routine</a>
+      </div>
+      <div class="card wrap">
+        <table>
+          <tr>
+            <th>Time</th>
+            <th>Routine</th>
+            <th>Repeats</th>
+            <th>Reminder message</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td class="time">07:30</td>
+            <td>
+              <h3>Morning medicine</h3>
+            </td>
+            <td>Every day</td>
+            <td><small>“Henri, time for your tablets.”</small></td>
+            <td><input class="switch" type="checkbox" checked></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="time">09:00</td>
+            <td>
+              <h3>Garden walk</h3>
+            </td>
+            <td>Mon · Wed · Fri</td>
+            <td><small>“A little fresh air?”</small></td>
+            <td><input class="switch" type="checkbox" checked></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="time">12:30</td>
+            <td>
+              <h3>Lunch and water</h3>
+            </td>
+            <td>Every day</td>
+            <td><small>“Lunch is ready.”</small></td>
+            <td><input class="switch" type="checkbox" checked></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="time">15:00</td>
+            <td>
+              <h3>Call Sophie</h3>
+            </td>
+            <td>Sun · Wed</td>
+            <td><small>“Sophie is waiting for your call.”</small></td>
+            <td><input class="switch" type="checkbox" checked></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="time">18:00</td>
+            <td>
+              <h3>Memory photo album</h3>
+            </td>
+            <td>Every day</td>
+            <td><small>“Let’s look at the photos.”</small></td>
+            <td><input class="switch" type="checkbox"></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="time">21:00</td>
+            <td>
+              <h3>Evening medicine</h3>
+            </td>
+            <td>Every day</td>
+            <td><small>“Last tablets of the day.”</small></td>
+            <td><input class="switch" type="checkbox" checked></td>
+            <td><a class="btn soft" href="#new">Edit</a></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ NEW ROUTINE ============ -->
+    <section class="view" id="new">
+      <div class="top">
+        <div>
+          <h1>New routine</h1>
+          <p class="mute">Henri will see this on his phone.</p>
+        </div><a class="btn soft" href="#routines">← Back</a>
+      </div>
+      <div class="card" style="max-width:640px">
+        <form action="#routines">
+          <label for="t">Title</label><input id="t" type="text" placeholder="For example: Drink a glass of water"
+            required>
+          <label for="d">Description</label><textarea id="d"
+            placeholder="A few simple words so Henri understands."></textarea>
+          <label for="h">Time of day</label><input id="h" type="time" value="10:00">
+          <label>Repeat on</label>
+          <div class="days">
+            <label><input type="checkbox" checked><span>Mon</span></label><label><input type="checkbox"
+                checked><span>Tue</span></label>
+            <label><input type="checkbox" checked><span>Wed</span></label><label><input type="checkbox"
+                checked><span>Thu</span></label>
+            <label><input type="checkbox" checked><span>Fri</span></label><label><input
+                type="checkbox"><span>Sat</span></label>
+            <label><input type="checkbox"><span>Sun</span></label>
+          </div>
+          <label for="m">Reminder message</label><input id="m" type="text" placeholder="“Henri, it is time for…”">
+          <label for="c">Category</label>
+          <select id="c">
+            <option>Health</option>
+            <option>Meals</option>
+            <option>Exercise</option>
+            <option>Family</option>
+            <option>Memory games</option>
+          </select>
+          <label style="display:flex;justify-content:space-between;align-items:center">Routine is active <input
+              class="switch" type="checkbox" checked></label>
+          <div style="display:flex;gap:10px;margin-top:24px"><button class="btn" type="submit">Save routine</button><a
+              class="btn soft" href="#routines">Cancel</a></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ ALERTS ============ -->
+    <section class="view" id="alerts">
+      <div class="top">
+        <div>
+          <h1>Alerts</h1>
+          <p class="mute">Everything Henri’s phone sent to you.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row alert"><span class="dot" style="background:var(--rose-t)"></span>
+          <div class="grow">
+            <h3>Henri pressed the help button</h3><small>Today, 10:42</small>
+          </div><span class="tag rose">Help</span><button class="btn soft read">Mark as read</button>
+        </div>
+        <div class="row alert"><span class="dot" style="background:var(--peach-t)"></span>
+          <div class="grow">
+            <h3>Lunch and water was not completed</h3><small>Today, 13:00</small>
+          </div><span class="tag rose">Missed task</span><button class="btn soft read">Mark as read</button>
+        </div>
+        <div class="row alert done"><span class="dot" style="background:var(--sky-t)"></span>
+          <div class="grow">
+            <h3>Henri left the safe zone “Home”</h3><small>Yesterday, 16:15</small>
+          </div><span class="tag rose">Zone exit</span><button class="btn soft read">Mark as read</button>
+        </div>
+        <div class="row alert done"><span class="dot" style="background:var(--mint-t)"></span>
+          <div class="grow">
+            <h3>Henri came back home</h3><small>Yesterday, 16:48</small>
+          </div><span class="tag mint">Info</span><button class="btn soft read">Mark as read</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROGRESS ============ -->
+    <section class="view" id="progress">
+      <div class="top">
+        <div>
+          <h1>Progress</h1>
+          <p class="mute">The task log of the last 7 days.</p>
+        </div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h2>Completed tasks</h2>
+          <div class="bars" style="margin-bottom:34px">
+            <div style="height:70%"><span>Mon</span></div>
+            <div style="height:85%"><span>Tue</span></div>
+            <div style="height:60%"><span>Wed</span></div>
+            <div style="height:90%"><span>Thu</span></div>
+            <div style="height:75%"><span>Fri</span></div>
+            <div style="height:55%"><span>Sat</span></div>
+            <div style="height:72%"><span>Sun</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>This week</h2>
+          <p><small>Medicine taken on time</small></p><progress max="100" value="92"></progress>
+          <p style="margin-top:14px"><small>Meals and water</small></p><progress max="100" value="78"></progress>
+          <p style="margin-top:14px"><small>Walks and exercise</small></p><progress max="100" value="64"></progress>
+          <p style="margin-top:14px"><small>Memory games</small></p><progress max="100" value="81"></progress>
+        </div>
+      </div>
+      <div class="card wrap" style="margin-top:18px">
+        <h2>Task log</h2>
+        <table>
+          <tr>
+            <th>Date</th>
+            <th>Routine</th>
+            <th>Status</th>
+            <th>Completed at</th>
+          </tr>
+          <tr>
+            <td>Today</td>
+            <td>Morning medicine</td>
+            <td><span class="tag mint">Done</span></td>
+            <td>07:34</td>
+          </tr>
+          <tr>
+            <td>Today</td>
+            <td>Garden walk</td>
+            <td><span class="tag mint">Done</span></td>
+            <td>09:12</td>
+          </tr>
+          <tr>
+            <td>Today</td>
+            <td>Lunch and water</td>
+            <td><span class="tag peach">Missed</span></td>
+            <td>–</td>
+          </tr>
+          <tr>
+            <td>Yesterday</td>
+            <td>Evening medicine</td>
+            <td><span class="tag mint">Done</span></td>
+            <td>21:05</td>
+          </tr>
+          <tr>
+            <td>Yesterday</td>
+            <td>Call Sophie</td>
+            <td><span class="tag mint">Done</span></td>
+            <td>15:20</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SAFE ZONES ============ -->
+    <section class="view" id="safety">
+      <div class="top">
+        <div>
+          <h1>Safe zones</h1>
+          <p class="mute">You get an alert when Henri leaves an active zone.</p>
+        </div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h2>Map</h2>
+          <div class="map">
+            <div class="zone"></div>
+            <div class="pin"></div>
+          </div>
+          <p style="margin-top:12px"><small>Henri is inside “Home” · updated 2 minutes ago</small></p>
+        </div>
+        <div class="card">
+          <h2>Your zones</h2>
+          <div class="row">
+            <div class="grow">
+              <h3>Home</h3><small>Radius 150 m</small>
+            </div><input class="switch" type="checkbox" checked>
+          </div>
+          <div class="row">
+            <div class="grow">
+              <h3>Park near the house</h3><small>Radius 300 m</small>
+            </div><input class="switch" type="checkbox" checked>
+          </div>
+          <div class="row">
+            <div class="grow">
+              <h3>Sophie’s house</h3><small>Radius 100 m</small>
+            </div><input class="switch" type="checkbox">
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px;max-width:640px">
+        <h2>Add a safe zone</h2>
+        <form action="#safety">
+          <label for="zn">Name</label><input id="zn" type="text" placeholder="For example: Church">
+          <label for="zr">Radius: from 50 m to 1000 m</label><input id="zr" type="range" min="50" max="1000" step="50"
+            value="200">
+          <button class="btn" style="margin-top:18px" type="submit">Save zone</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ PATIENT ============ -->
+    <section class="view" id="patient">
+      <div class="top">
+        <div>
+          <h1>Patient</h1>
+          <p class="mute">The person you care for.</p>
+        </div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:10px">
+            <div class="avatar" style="width:64px;height:64px;font-size:22px;background:var(--sky);color:var(--sky-t)">
+              HM</div>
+            <div>
+              <h2 style="margin:0">Henri Martin</h2><small>Born 14 March 1948</small>
+            </div>
+          </div>
+          <div class="row"><small class="grow">Status</small><span class="tag mint">Phone connected</span></div>
+          <div class="row"><small class="grow">Caregiver</small><span>Claire Dubois</span></div>
+          <div class="row"><small class="grow">Phone</small><span>+44 7700 900123</span></div>
+        </div>
+        <div class="card">
+          <h2>Pairing code</h2>
+          <p class="mute" style="margin-bottom:14px">Type this code on Henri’s phone to link both apps.</p>
+          <span class="code">HN-4821</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h2>Good to know</h2>
+        <details open>
+          <summary>What does the help button do?</summary>
+          <p class="mute">Henri presses it, and you get an alert with his position straight away.</p>
+        </details>
+        <details>
+          <summary>What if the phone is off?</summary>
+          <p class="mute">The last known position stays visible, and you are alerted if no position arrives.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ SETTINGS ============ -->
+    <section class="view" id="settings">
+      <div class="top">
+        <div>
+          <h1>Settings</h1>
+          <p class="mute">Your account and notifications.</p>
+        </div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h2>Your account</h2>
+          <form action="#settings">
+            <label for="n">Name</label><input id="n" type="text" value="Claire Dubois">
+            <label for="e">Email</label><input id="e" type="email" value="claire@example.com">
+            <label for="p">Phone</label><input id="p" type="tel" value="+44 7700 900456">
+            <button class="btn" style="margin-top:20px">Save changes</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>Notifications</h2>
+          <div class="row"><span class="grow">Help button pressed</span><input class="switch" type="checkbox" checked>
+          </div>
+          <div class="row"><span class="grow">Patient leaves a safe zone</span><input class="switch" type="checkbox"
+              checked></div>
+          <div class="row"><span class="grow">Missed tasks</span><input class="switch" type="checkbox" checked></div>
+          <div class="row"><span class="grow">Daily summary by email</span><input class="switch" type="checkbox"></div>
+          <label for="l">Language</label><select id="l">
+            <option>English</option>
+            <option>Français</option>
+          </select>
+          <div style="margin-top:20px"><button class="btn red">Log out</button></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* The only JavaScript: show today's date, and grey out an alert once it is marked as read */
+    document.getElementById("today").textContent = new Date().toLocaleDateString("en-GB", {weekday: "long", day: "numeric", month: "long"});
+    document.querySelectorAll(".read").forEach(function (b) {
+      b.onclick = function () {b.closest(".alert").classList.toggle("done");};
+    });
+  </script>
+</body>
+
+</html>

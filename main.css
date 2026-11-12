@@ -1,0 +1,651 @@
+
+    /* 1. COLOURS: change them here and the whole app changes */
+    :root {
+      --bg: #f6f7fb;
+      --card: rgba(255, 255, 255, .78);
+      --ink: #262a3d;
+      --mute: #7b8198;
+      --line: #e9ebf4;
+      --mint: #dcf3e8;
+      --mint-t: #2b8f69;
+      --lav: #e8e4fb;
+      --lav-t: #6454cf;
+      --peach: #fde8dc;
+      --peach-t: #cf6c3a;
+      --sky: #dfedfb;
+      --sky-t: #3578b8;
+      --rose: #fbe0e6;
+      --rose-t: #cc4a66;
+      --shadow: 0 8px 30px rgba(60, 70, 120, .08);
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #13151e;
+        --card: rgba(30, 33, 48, .8);
+        --ink: #eceef8;
+        --mute: #9aa0b8;
+        --line: #2a2e42;
+        --mint: #1d3a31;
+        --mint-t: #7fdcb5;
+        --lav: #2a2650;
+        --lav-t: #b3a8ff;
+        --peach: #43291e;
+        --peach-t: #ffb18a;
+        --sky: #1d3249;
+        --sky-t: #8cc4f5;
+        --rose: #472029;
+        --rose-t: #ff9fb4;
+        --shadow: 0 8px 30px rgba(0, 0, 0, .3);
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #13151e;
+      --card: rgba(30, 33, 48, .8);
+      --ink: #eceef8;
+      --mute: #9aa0b8;
+      --line: #2a2e42;
+      --mint: #1d3a31;
+      --mint-t: #7fdcb5;
+      --lav: #2a2650;
+      --lav-t: #b3a8ff;
+      --peach: #43291e;
+      --peach-t: #ffb18a;
+      --sky: #1d3249;
+      --sky-t: #8cc4f5;
+      --rose: #472029;
+      --rose-t: #ff9fb4;
+      --shadow: 0 8px 30px rgba(0, 0, 0, .3);
+      color-scheme: dark;
+    }
+
+    /* 2. BASICS */
+    * {
+      box-sizing: border-box;
+      margin: 0
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+      scroll-behavior: smooth
+    }
+
+    body {
+      font: 15px/1.55 Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      background-image: radial-gradient(600px 400px at 85% -5%, var(--lav), transparent), radial-gradient(500px 400px at 0 100%, var(--mint), transparent);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    h1,
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -.01em
+    }
+
+    h1 {
+      font-size: 30px
+    }
+
+    h2 {
+      font-size: 20px
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600
+    }
+
+    small,
+    .mute {
+      color: var(--mute)
+    }
+
+    /* 3. SIDEBAR */
+    aside {
+      width: 250px;
+      padding: 28px 20px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border-right: 1px solid var(--line)
+    }
+
+    .logo {
+      font: 600 22px Fraunces, serif;
+      padding: 0 12px 22px
+    }
+
+    .logo span {
+      color: var(--lav-t)
+    }
+
+    aside nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    aside a.nav {
+      padding: 11px 14px;
+      border-radius: 12px;
+      color: var(--mute);
+      font-weight: 500;
+      transition: .2s
+    }
+
+    aside a.nav:hover {
+      background: var(--lav);
+      color: var(--lav-t)
+    }
+
+    .me {
+      margin-top: auto;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--bg);
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--peach);
+      color: var(--peach-t);
+      display: grid;
+      place-items: center;
+      font-weight: 600;
+      flex: none
+    }
+
+    /* active menu item (the page being shown) */
+    body:not(:has(.view:target)) a[href="#overview"],
+    body:has(#overview:target) a[href="#overview"],
+    body:has(#routines:target) a[href="#routines"],
+    body:has(#new:target) a[href="#routines"],
+    body:has(#alerts:target) a[href="#alerts"],
+    body:has(#progress:target) a[href="#progress"],
+    body:has(#safety:target) a[href="#safety"],
+    body:has(#patient:target) a[href="#patient"],
+    body:has(#settings:target) a[href="#settings"] {
+      background: var(--lav);
+      color: var(--lav-t)
+    }
+
+    /* 4. PAGES: only the one in the address bar (#name) is visible */
+    main {
+      flex: 1;
+      padding: 36px 44px 60px;
+      max-width: 1180px;
+      min-width: 0
+    }
+
+    .view {
+      display: none;
+      animation: in .35s ease
+    }
+
+    .view:target,
+    body:not(:has(.view:target)) #overview {
+      display: block
+    }
+
+    @keyframes in {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px
+    }
+
+    /* 5. CARDS, GRID, BUTTONS */
+    .grid {
+      display: grid;
+      gap: 18px
+    }
+
+    .g4 {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+    }
+
+    .g2 {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow)
+    }
+
+    .card h2 {
+      margin-bottom: 14px
+    }
+
+    .stat b {
+      display: block;
+      font: 600 32px Fraunces, serif;
+      margin: 6px 0 2px
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      cursor: pointer;
+      font: 500 14px Inter, sans-serif;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: var(--lav-t);
+      color: #fff;
+      transition: .2s
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(100, 84, 207, .3)
+    }
+
+    .btn.soft {
+      background: var(--lav);
+      color: var(--lav-t)
+    }
+
+    .btn.soft:hover {
+      box-shadow: none
+    }
+
+    .btn.red {
+      background: var(--rose);
+      color: var(--rose-t)
+    }
+
+    .btn.red:hover {
+      box-shadow: none
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 11px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500
+    }
+
+    .mint {
+      background: var(--mint);
+      color: var(--mint-t)
+    }
+
+    .lav {
+      background: var(--lav);
+      color: var(--lav-t)
+    }
+
+    .peach {
+      background: var(--peach);
+      color: var(--peach-t)
+    }
+
+    .sky {
+      background: var(--sky);
+      color: var(--sky-t)
+    }
+
+    .rose {
+      background: var(--rose);
+      color: var(--rose-t)
+    }
+
+    progress {
+      width: 100%;
+      height: 8px;
+      border-radius: 9px;
+      border: 0;
+      overflow: hidden;
+      background: var(--line);
+      accent-color: var(--mint-t)
+    }
+
+    progress::-webkit-progress-bar {
+      background: var(--line)
+    }
+
+    progress::-webkit-progress-value {
+      background: var(--mint-t);
+      border-radius: 9px
+    }
+
+    progress::-moz-progress-bar {
+      background: var(--mint-t)
+    }
+
+    /* 6. LISTS AND TABLES */
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .row:last-child {
+      border: 0
+    }
+
+    .row .grow {
+      flex: 1;
+      min-width: 0
+    }
+
+    .time {
+      font-weight: 600;
+      width: 56px;
+      color: var(--lav-t)
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--mint-t);
+      flex: none
+    }
+
+    .wrap {
+      overflow-x: auto
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 520px
+    }
+
+    th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--mute);
+      font-size: 13px;
+      padding: 8px 10px
+    }
+
+    td {
+      padding: 13px 10px;
+      border-top: 1px solid var(--line)
+    }
+
+    .alert.done {
+      opacity: .5
+    }
+
+    .alert.done .tag.rose {
+      background: var(--line);
+      color: var(--mute)
+    }
+
+    /* 7. FORMS */
+    label {
+      display: block;
+      font-weight: 500;
+      margin: 16px 0 6px;
+      font-size: 14px
+    }
+
+    input[type=text],
+    input[type=time],
+    input[type=email],
+    input[type=tel],
+    select,
+    textarea {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      outline: 0;
+      transition: .2s
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--lav-t);
+      box-shadow: 0 0 0 4px var(--lav)
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--lav-t)
+    }
+
+    .days {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .days label {
+      margin: 0
+    }
+
+    .days input {
+      display: none
+    }
+
+    .days span {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-size: 13px;
+      transition: .2s
+    }
+
+    .days input:checked+span {
+      background: var(--lav-t);
+      color: #fff;
+      border-color: var(--lav-t)
+    }
+
+    /* on/off switch made only with a checkbox */
+    .switch {
+      appearance: none;
+      width: 42px;
+      height: 24px;
+      border-radius: 99px;
+      background: var(--line);
+      position: relative;
+      cursor: pointer;
+      transition: .25s;
+      flex: none
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+      transition: .25s
+    }
+
+    .switch:checked {
+      background: var(--mint-t)
+    }
+
+    .switch:checked::after {
+      left: 21px
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 500
+    }
+
+    /* 8. MAP (drawn with CSS) */
+    .map {
+      position: relative;
+      height: 250px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(var(--line) 1px, transparent 1px) 0 0/40px 40px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/40px 40px, var(--sky)
+    }
+
+    .zone {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px;
+      border-radius: 50%;
+      background: rgba(100, 84, 207, .14);
+      border: 2px dashed var(--lav-t)
+    }
+
+    .pin {
+      position: absolute;
+      left: 54%;
+      top: 46%;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--rose-t);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 8px rgba(204, 74, 102, .2)
+    }
+
+    /* weekly bars */
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      height: 170px;
+      padding-top: 10px
+    }
+
+    .bars div {
+      flex: 1;
+      border-radius: 10px 10px 4px 4px;
+      background: var(--lav);
+      position: relative;
+      transition: .2s
+    }
+
+    .bars div:hover {
+      background: var(--lav-t)
+    }
+
+    .bars span {
+      position: absolute;
+      bottom: -24px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--mute)
+    }
+
+    .code {
+      font: 600 34px Fraunces, serif;
+      letter-spacing: .14em;
+      background: var(--lav);
+      color: var(--lav-t);
+      padding: 14px 22px;
+      border-radius: 16px;
+      display: inline-block
+    }
+
+    /* 9. PHONES */
+    @media (max-width:860px) {
+      body {
+        flex-direction: column
+      }
+
+      aside {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        z-index: 5;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 14px;
+        overflow-x: auto;
+        gap: 8px
+      }
+
+      .logo {
+        padding: 0 8px 0 0
+      }
+
+      aside nav {
+        flex-direction: row
+      }
+
+      aside a.nav {
+        white-space: nowrap;
+        padding: 8px 12px
+      }
+
+      .me {
+        display: none
+      }
+
+      main {
+        padding: 24px 18px 50px
+      }
+    }
