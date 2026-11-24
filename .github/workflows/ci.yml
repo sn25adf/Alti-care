@@ -15,5 +15,5 @@ jobs:
 
       - name: check required files
         run: |
-          test -f AlzheiCare · Caregiver dashboard.html
+          test -f "AlzheiCare · Caregiver dashboard.html"
           test -f main.css
