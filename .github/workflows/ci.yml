@@ -1,1 +1,19 @@
 name: CI
+
+on:
+  push:
+    branches: stephane
+  pull_request:
+    branches: stephane
+
+jobs:
+  check-files:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: check required files
+        run: |
+          test -f AlzheiCare · Caregiver dashboard.html
+          test -f main.css
